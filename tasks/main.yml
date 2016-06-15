@@ -8,4 +8,4 @@
     - certbot
 
 - name: install certbot renew daily task
-  cron: name="certbot renew" day="*" job="certbot renew --quiet"
+  cron: name="certbot renew" hour="8" job="certbot renew --quiet"
