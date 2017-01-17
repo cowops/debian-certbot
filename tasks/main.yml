@@ -7,5 +7,10 @@
   with_items:
     - certbot
 
+- name: get certbot path
+  command: "which certbot"
+  register: certbot_path
+
 - name: install certbot renew daily task
-  cron: name="certbot renew" hour="8" job="certbot renew --quiet"
+  cron: name="certbot renew" hour="8" job="{{ item }} renew --quiet"
+  with_items: '{{ certbot_path.stdout }}'
