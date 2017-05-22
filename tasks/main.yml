@@ -12,5 +12,5 @@
   register: certbot_path
 
 - name: install certbot renew daily task
-  cron: name="certbot daily renew" hour="7" job='{{ item }} -q renew --pre-hook "service nginx stop" --post-hook "service nginx start"'
+  cron: name="certbot daily renew" hour="7" minute="0" job='{{ item }} -q renew --pre-hook "service nginx stop" --post-hook "service nginx start"'
   with_items: '{{ certbot_path.stdout }}'
