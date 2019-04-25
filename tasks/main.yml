@@ -3,9 +3,15 @@
   apt_repository: repo='deb http://httpredir.debian.org/debian {{ debian.version }}-backports main' state=present
 
 - name: install certbot package
-  apt: name={{ item }} state=latest default_release={{ debian.version }}-backports update_cache=yes
-  with_items:
-    - certbot
+  apt:
+    name: {{ packages }}
+    state: latest
+    default_release: {{ debian.version }}-backports
+    update_cache: yes
+    force: yes
+  vars:
+    packages:
+      - certbot
 
 - name: get certbot path
   command: "which certbot"
