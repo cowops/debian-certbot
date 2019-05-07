@@ -4,7 +4,7 @@
 
 - name: install certbot package
   apt:
-    name: {{ packages }}
+    name: "{{ packages }}"
     state: latest
     default_release: {{ debian.version }}-backports
     update_cache: yes
