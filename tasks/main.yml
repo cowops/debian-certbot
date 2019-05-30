@@ -6,7 +6,7 @@
   apt:
     name: "{{ packages }}"
     state: latest
-    default_release: {{ debian.version }}-backports
+    default_release: "{{ debian.version }}-backports"
     update_cache: yes
     force: yes
   vars:
