@@ -1,8 +1,9 @@
 ---
 - name: add certbot deb repository
   apt_repository: repo='deb http://httpredir.debian.org/debian {{ debian.version }}-backports main' state=present
+  when: use_backport
 
-- name: install certbot package
+- name: install backport certbot package
   apt:
     name: "{{ packages }}"
     state: latest
@@ -12,6 +13,18 @@
   vars:
     packages:
       - certbot
+  when: use_backport
+
+- name: install certbot package
+  apt:
+    name: "{{ packages }}"
+    state: latest
+    update_cache: yes
+    force: yes
+  vars:
+    packages:
+      - certbot
+  when: not use_backport
 
 - name: get certbot path
   command: "which certbot"
